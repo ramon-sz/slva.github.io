@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chick'n Korner — Coulommiers</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0C0C0C;--ink2:#121212;--ink3:#181818;
+  --fire:#FF7A1A;--fire2:#FF9A4A;
+  --fire3:rgba(255,122,26,0.1);--fire4:rgba(255,122,26,0.2);
+  --ash:#F5F0E8;--ash2:rgba(245,240,232,0.42);--line:rgba(245,240,232,0.06);
+}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--ash);font-family:'Outfit',sans-serif;overflow-x:hidden;cursor:none}
+
+#c{width:8px;height:8px;background:var(--fire);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s,border-radius .2s}
+#cr{width:26px;height:26px;border:1px solid rgba(255,122,26,.4);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%)}
+
+nav{position:fixed;top:0;width:100%;z-index:500;display:flex;justify-content:space-between;align-items:center;padding:1rem 2.5rem;background:rgba(12,12,12,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--line)}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:var(--ash);text-decoration:none;letter-spacing:-.02em}
+.logo em{color:var(--fire);font-style:normal}
+nav ul{list-style:none;display:flex;gap:1.8rem;align-items:center}
+nav a{text-decoration:none;color:var(--ash2);font-size:.8rem;font-weight:500;transition:color .18s}
+nav a:hover{color:var(--ash)}
+.nav-cta{background:var(--fire)!important;color:#000!important;padding:.45rem 1.1rem;border-radius:4px;font-weight:700!important;font-size:.77rem!important}
+
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:9rem 3.5rem 5rem;position:relative;z-index:2}
+.hero-left::before{content:'';position:absolute;top:0;right:0;width:1px;height:100%;background:linear-gradient(to bottom,transparent,var(--fire) 40%,var(--fire) 60%,transparent);opacity:.2}
+.hero-right{position:relative;background:var(--ink2);overflow:hidden;display:flex;align-items:center;justify-content:center}
+.hero-right::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 70% at 55% 45%,rgba(255,122,26,.1) 0%,transparent 65%)}
+
+.hero-word{position:absolute;font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-.04em;line-height:.88;text-align:center;z-index:2}
+.hw1{font-size:clamp(4rem,8vw,7.5rem);color:transparent;-webkit-text-stroke:1px rgba(245,240,232,.12);top:20%;left:50%;transform:translateX(-50%)}
+.hw2{font-size:clamp(5rem,10vw,9rem);color:var(--fire);top:50%;left:50%;transform:translate(-50%,-50%)}
+.hw3{font-size:clamp(4rem,8vw,7.5rem);color:transparent;-webkit-text-stroke:1px rgba(245,240,232,.12);bottom:18%;left:50%;transform:translateX(-50%)}
+.hero-score-card{position:absolute;bottom:2rem;left:2rem;background:rgba(12,12,12,.88);border:1px solid var(--fire4);backdrop-filter:blur(16px);padding:.9rem 1.2rem;border-radius:6px;z-index:3}
+.hsc-n{font-family:'Syne',sans-serif;font-weight:800;font-size:1.8rem;color:var(--fire);line-height:1}
+.hsc-l{font-size:.58rem;color:var(--ash2);letter-spacing:.1em;margin-top:.2rem}
+
+.h-chip{display:inline-flex;align-items:center;gap:.5rem;background:var(--fire3);border:1px solid var(--fire4);border-radius:3px;padding:.3rem .8rem;font-size:.68rem;color:var(--fire);letter-spacing:.08em;font-weight:600;margin-bottom:1.8rem;animation:up .6s ease both}
+.h-dot{width:5px;height:5px;background:var(--fire);border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+h1{font-family:'Syne',sans-serif;font-weight:800;line-height:.92;letter-spacing:-.04em;animation:up .6s .07s ease both}
+h1 .big{font-size:clamp(3rem,6vw,5.8rem);display:block;color:var(--ash)}
+h1 .fire{font-size:clamp(3rem,6vw,5.8rem);display:block;color:var(--fire)}
+h1 .ghost{font-size:clamp(2.2rem,4.5vw,4.5rem);display:block;-webkit-text-stroke:1px rgba(245,240,232,.18);color:transparent}
+.h-desc{font-size:.9rem;color:var(--ash2);line-height:1.8;max-width:360px;margin:1.8rem 0 2.2rem;font-weight:300;animation:up .6s .14s ease both}
+.h-btns{display:flex;gap:.7rem;flex-wrap:wrap;animation:up .6s .2s ease both}
+.h-scores{display:flex;gap:2rem;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--line);animation:up .6s .27s ease both}
+.hs-n{font-family:'Syne',sans-serif;font-weight:800;font-size:1.9rem;color:var(--fire);line-height:1}
+.hs-l{font-size:.6rem;color:var(--ash2);letter-spacing:.1em;margin-top:.2rem}
+
+.b-fire{background:var(--fire);color:#000;padding:.8rem 1.8rem;border-radius:4px;font-family:'Syne',sans-serif;font-weight:700;font-size:.84rem;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;transition:all .2s;white-space:nowrap}
+.b-fire:hover{background:var(--fire2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,122,26,.25)}
+.b-wire{background:transparent;color:var(--ash);padding:.8rem 1.8rem;border-radius:4px;font-family:'Syne',sans-serif;font-weight:600;font-size:.84rem;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;border:1px solid var(--line);transition:all .2s;white-space:nowrap}
+.b-wire:hover{border-color:rgba(245,240,232,.2);transform:translateY(-2px)}
+
+.ticker{overflow:hidden;background:var(--fire);padding:.65rem 0}
+.tt{display:flex;width:max-content;animation:tick 22s linear infinite}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ti{font-family:'Syne',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.14em;color:#000;white-space:nowrap;padding:0 2rem;display:flex;align-items:center;gap:2rem}
+.ts{width:3px;height:3px;background:rgba(0,0,0,.28);border-radius:50%}
+
+.uber-strip{background:var(--ink2);border-bottom:1px solid var(--line);padding:1.5rem 2.5rem;display:flex;justify-content:space-between;align-items:center;gap:1.5rem;flex-wrap:wrap}
+.us-l{display:flex;align-items:center;gap:1.2rem}
+.us-badge{background:#000;border:1px solid rgba(255,255,255,.07);border-radius:4px;padding:.45rem .9rem;font-family:'Syne',sans-serif;font-weight:800;font-size:.8rem}
+.us-badge span{color:#06C167}
+.us-info h4{font-family:'Syne',sans-serif;font-weight:700;font-size:.92rem}
+.us-info p{font-size:.72rem;color:var(--ash2);margin-top:.12rem}
+.us-r{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.us-num .n{font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;color:var(--fire)}
+.us-num .l{font-size:.58rem;color:var(--ash2);letter-spacing:.08em}
+
+section{padding:5rem 2.5rem}
+.lbl{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--fire);margin-bottom:.8rem;display:flex;align-items:center;gap:.6rem}
+.lbl::before{content:'';width:14px;height:1px;background:var(--fire)}
+h2{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.9rem,4vw,3.2rem);line-height:1.02;letter-spacing:-.03em}
+h2 .o{color:var(--fire)}
+
+.menu-sec{background:var(--ink2)}
+.menu-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:wrap;gap:1rem}
+
+.cat-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2.5rem}
+.cat-tab{background:transparent;color:var(--ash2);border:1px solid var(--line);padding:.45rem 1rem;border-radius:3px;font-family:'Syne',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.05em;cursor:pointer;transition:all .2s}
+.cat-tab.active,.cat-tab:hover{background:var(--fire);color:#000;border-color:var(--fire)}
+
+.cat-block{margin-bottom:3.5rem}
+.cat-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;color:var(--ash);margin-bottom:1.2rem;padding-bottom:.8rem;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:.8rem}
+.cat-title span{font-size:.7rem;font-weight:500;color:var(--ash2);letter-spacing:.08em;font-family:'Outfit',sans-serif}
+
+.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line)}
+
+.mc{background:var(--ink);position:relative;overflow:hidden;transition:background .25s;cursor:none;display:flex;flex-direction:column;padding:2rem 1.8rem 1.8rem}
+.mc:hover{background:#0f0f0f}
+
+.mc-letter{font-family:'Syne',sans-serif;font-weight:800;font-size:4.5rem;line-height:1;letter-spacing:-.05em;color:transparent;-webkit-text-stroke:1px rgba(255,122,26,.2);margin-bottom:.7rem;display:block;transition:color .3s,-webkit-text-stroke .3s;user-select:none}
+.mc:hover .mc-letter{color:rgba(255,122,26,.07);-webkit-text-stroke:1px rgba(255,122,26,.4)}
+
+.mc-num{position:absolute;top:.8rem;right:1rem;font-family:'Syne',sans-serif;font-weight:800;font-size:5.5rem;color:rgba(255,122,26,.04);line-height:1;letter-spacing:-.06em;pointer-events:none;transition:color .3s}
+.mc:hover .mc-num{color:rgba(255,122,26,.07)}
+
+.mc-tag{position:absolute;top:1.1rem;left:1.1rem;background:var(--fire);color:#000;font-family:'Syne',sans-serif;font-size:.57rem;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .58rem;border-radius:3px;font-weight:700}
+.mc-name{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:.35rem;color:var(--ash)}
+.mc-desc{font-size:.75rem;color:var(--ash2);line-height:1.6;font-weight:300;flex:1;margin-bottom:.9rem}
+.mc-price{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:var(--fire)}
+.mc-bar{position:absolute;bottom:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,var(--fire),var(--fire2));transform:scaleX(0);transform-origin:left;transition:transform .35s}
+.mc:hover .mc-bar{transform:scaleX(1)}
+
+.mc.featured{background:linear-gradient(135deg,#0f0f0f,#141008);display:grid;grid-template-columns:1fr 1fr;padding:0;max-width:660px}
+.mc.featured .feat-left{padding:2.5rem 2rem;display:flex;flex-direction:column;justify-content:center}
+.mc.featured .feat-right{display:flex;align-items:center;justify-content:center;padding:2rem;border-left:1px solid var(--line)}
+.mc.featured .feat-big{font-family:'Syne',sans-serif;font-weight:800;font-size:6rem;color:transparent;-webkit-text-stroke:1.5px rgba(255,122,26,.3);line-height:1;letter-spacing:-.06em;text-align:center}
+.mc.featured:hover .feat-big{color:rgba(255,122,26,.08);-webkit-text-stroke:1.5px rgba(255,122,26,.5)}
+
+.order-sec{text-align:center;padding:5rem 2.5rem;background:var(--ink);border-top:1px solid var(--line);position:relative;overflow:hidden}
+.order-sec::before{content:'EAT';font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(8rem,22vw,18rem);color:transparent;-webkit-text-stroke:1px rgba(255,122,26,.04);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;letter-spacing:-.04em;pointer-events:none}
+.oi{position:relative;z-index:1}
+.oi p{font-size:.9rem;color:var(--ash2);max-width:380px;margin:.8rem auto 2rem;line-height:1.8;font-weight:300}
+.ob{display:flex;justify-content:center;gap:.7rem;flex-wrap:wrap}
+.b-fire-big{background:var(--fire);color:#000;padding:.95rem 2.4rem;border-radius:4px;font-family:'Syne',sans-serif;font-weight:800;font-size:.95rem;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;transition:all .22s}
+.b-fire-big:hover{background:var(--fire2);transform:translateY(-3px);box-shadow:0 12px 32px rgba(255,122,26,.3)}
+
+.rev-sec{background:var(--ink2)}
+.rev-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2.5rem;flex-wrap:wrap;gap:1rem}
+.rev-big{font-family:'Syne',sans-serif;font-weight:800;font-size:3.8rem;line-height:1;color:var(--fire)}
+.rev-sub{font-size:.62rem;color:var(--ash2);letter-spacing:.1em;margin-top:.12rem}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
+.rc{background:var(--ink);border:1px solid var(--line);border-radius:6px;padding:1.5rem;transition:border-color .25s,transform .25s;position:relative;overflow:hidden}
+.rc-deco{position:absolute;top:-.5rem;right:.8rem;font-family:'Syne',sans-serif;font-weight:800;font-size:5rem;color:rgba(255,122,26,.05);line-height:1;pointer-events:none}
+.rc:hover{border-color:var(--fire4);transform:translateY(-3px)}
+.rc-stars{color:var(--fire);font-size:.75rem;letter-spacing:2px;margin-bottom:.8rem}
+.rc-text{font-size:.79rem;line-height:1.78;color:rgba(245,240,232,.55);font-style:italic;font-weight:300;margin-bottom:1.1rem}
+.rc-author{font-family:'Syne',sans-serif;font-weight:700;font-size:.78rem}
+.rc-plat{font-size:.58rem;color:var(--fire);letter-spacing:.1em;margin-top:.1rem}
+
+.info-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);background:var(--ink)}
+.ib{padding:2.5rem;border-right:1px solid var(--line);background:var(--ink);position:relative;overflow:hidden}
+.ib:last-child{border-right:none}
+.ib-wm{position:absolute;top:50%;right:.5rem;transform:translateY(-50%);font-family:'Syne',sans-serif;font-weight:800;font-size:5rem;color:rgba(255,122,26,.04);line-height:1;pointer-events:none}
+.ib-title{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:.5rem;position:relative}
+.ib-text{font-size:.77rem;color:var(--ash2);line-height:1.82;font-weight:300;position:relative}
+.ib-text a{color:var(--fire);text-decoration:none;transition:opacity .18s}
+.ib-text a:hover{opacity:.72}
+.open-pill{display:inline-flex;align-items:center;gap:.4rem;background:var(--fire3);border:1px solid var(--fire4);color:var(--fire);font-size:.63rem;letter-spacing:.08em;padding:.22rem .65rem;border-radius:3px;margin-top:.5rem}
+.op-dot{width:4px;height:4px;background:var(--fire);border-radius:50%;animation:blink 2s infinite}
+
+footer{background:#080808;padding:2rem 2.5rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);flex-wrap:wrap;gap:1rem}
+.fl{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem}
+.fl em{color:var(--fire);font-style:normal}
+.fc{font-size:.68rem;color:var(--ash2)}
+.flinks{display:flex;gap:1.6rem}
+.flinks a{font-size:.68rem;color:var(--ash2);text-decoration:none;transition:color .18s}
+.flinks a:hover{color:var(--ash)}
+
+@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.fi{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
+.fi.v{opacity:1;transform:translateY(0)}
+
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr}
+  .hero-right{min-height:55vh}
+  .menu-grid{grid-template-columns:1fr 1fr}
+  .rev-grid{grid-template-columns:1fr}
+  .info-grid{grid-template-columns:1fr}
+  .ib{border-right:none;border-bottom:1px solid var(--line)}
+  footer,.uber-strip{flex-direction:column;text-align:center}
+  .us-l{flex-direction:column}
+  nav ul{display:none}
+  nav,section{padding-left:1.5rem;padding-right:1.5rem}
+  section{padding-top:3.5rem;padding-bottom:3.5rem}
+}
+@media(max-width:520px){.menu-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div id="c"></div>
+<div id="cr"></div>
+
+<nav>
+  <a href="#" class="logo">Chick'n <em>Korner</em></a>
+  <ul>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#avis">Avis</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="https://www.ubereats.com/fr/store/chickn-korner-coulommiers/tTn6JCPpUXuDsAo6Bw1rew" target="_blank" class="nav-cta">Commander →</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="top">
+  <div class="hero-left">
+    <div class="h-chip"><div class="h-dot"></div> Coulommiers · 22 Rue de la Pêcherie · Halal</div>
+    <h1>
+      <span class="big">Le poulet</span>
+      <span class="fire">fait maison.</span>
+      <span class="ghost">Livré chez toi.</span>
+    </h1>
+    <p class="h-desc">Cuisine maison généreuse, prix abordables, épices secrètes. Le spot incontournable de Coulommiers — sur place ou livré en quelques clics.</p>
+    <div class="h-btns">
+      <a href="https://www.ubereats.com/fr/store/chickn-korner-coulommiers/tTn6JCPpUXuDsAo6Bw1rew" target="_blank" class="b-fire">Commander sur Uber Eats →</a>
+      <a href="#menu" class="b-wire">Voir la carte</a>
+    </div>
+    <div class="h-scores">
+      <div><div class="hs-n">4.7</div><div class="hs-l">GOOGLE · 175 AVIS</div></div>
+      <div><div class="hs-n">4.6</div><div class="hs-l">UBER EATS · 350+ AVIS</div></div>
+      <div><div class="hs-n">23h</div><div class="hs-l">OUVERT JUSQU'À</div></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-word hw1">POULET</div>
+    <div class="hero-word hw2">KORNER</div>
+    <div class="hero-word hw3">MAISON</div>
+    <div class="hero-score-card">
+      <div class="hsc-n">4.6★</div>
+      <div class="hsc-l">350+ AVIS UBER EATS</div>
+    </div>
+  </div>
+</section>
+
+<div class="ticker">
+  <div class="tt">
+    <div class="ti">CHICK'N KORNER<div class="ts"></div></div>
+    <div class="ti">CUISINE MAISON<div class="ts"></div></div>
+    <div class="ti">HALAL<div class="ts"></div></div>
+    <div class="ti">COULOMMIERS 77<div class="ts"></div></div>
+    <div class="ti">UBER EATS 4.6★<div class="ts"></div></div>
+    <div class="ti">GOOGLE 4.7★<div class="ts"></div></div>
+    <div class="ti">OUVERT JUSQU'À 23H<div class="ts"></div></div>
+    <div class="ti">PRIX ABORDABLES<div class="ts"></div></div>
+    <div class="ti">CHICK'N KORNER<div class="ts"></div></div>
+    <div class="ti">CUISINE MAISON<div class="ts"></div></div>
+    <div class="ti">HALAL<div class="ts"></div></div>
+    <div class="ti">COULOMMIERS 77<div class="ts"></div></div>
+    <div class="ti">UBER EATS 4.6★<div class="ts"></div></div>
+    <div class="ti">GOOGLE 4.7★<div class="ts"></div></div>
+    <div class="ti">OUVERT JUSQU'À 23H<div class="ts"></div></div>
+    <div class="ti">PRIX ABORDABLES<div class="ts"></div></div>
+  </div>
+</div>
+
+<div class="uber-strip">
+  <div class="us-l">
+    <div class="us-badge">Uber <span>Eats</span></div>
+    <div class="us-info"><h4>Disponible sur Uber Eats</h4><p>Commande en quelques clics · Livraison à domicile · Frais de livraison à 0,00 €</p></div>
+  </div>
+  <div class="us-r">
+    <div class="us-num"><div class="n">4.6</div><div class="l">NOTE MOYENNE</div></div>
+    <div class="us-num"><div class="n">350+</div><div class="l">AVIS CLIENTS</div></div>
+    <a href="https://www.ubereats.com/fr/store/chickn-korner-coulommiers/tTn6JCPpUXuDsAo6Bw1rew" target="_blank" class="b-fire">Commander →</a>
+  </div>
+</div>
+
+<section class="menu-sec fi" id="menu">
+  <div class="menu-head">
+    <div><div class="lbl">La Carte Complète</div><h2>Nos <span class="o">plats</span></h2></div>
+    <a href="https://www.ubereats.com/fr/store/chickn-korner-coulommiers/tTn6JCPpUXuDsAo6Bw1rew" target="_blank" class="b-fire">Commander sur Uber Eats →</a>
+  </div>
+
+  <div class="cat-block">
+    <div class="cat-title">Bon Plan <span>LE MUST</span></div>
+    <div class="menu-grid" style="grid-template-columns:1fr">
+      <div class="mc featured">
+        <div class="feat-left">
+          <div class="mc-tag" style="position:relative;top:auto;left:auto;display:inline-block;align-self:flex-start;margin-bottom:1rem">N°1 · Best-seller</div>
+          <div class="mc-name" style="font-size:1.4rem;margin-bottom:.5rem">CK Bowl</div>
+          <div class="mc-desc" style="font-size:.88rem">Poulet ultra-croustillant, riz fondant, sauce secrète crémeuse, oignons frits. Le plat signature qui a tout pour plaire.</div>
+          <div class="mc-price" style="font-size:1.4rem;margin-bottom:1.2rem">11,50€</div>
+          <a href="https://www.ubereats.com/fr/store/chickn-korner-coulommiers/tTn6JCPpUXuDsAo6Bw1rew" target="_blank" class="b-fire" style="font-size:.78rem;padding:.65rem 1.2rem;align-self:flex-start">Commander →</a>
+        </div>
+        <div class="feat-right"><div class="feat-big">CK</div></div>
+        <div class="mc-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cat-block">
+    <div class="cat-title">Les Plats au Poulet <span>9 ARTICLES</span></div>
+    <div class="menu-grid">
+      <div class="mc"><div class="mc-num">01</div><span class="mc-letter">SB</span><div class="mc-name">Saucisse de Boeuf</div><div class="mc-desc">Saucisse de bœuf caramélisée, dorée et savoureuse.</div><div class="mc-price">2,50€</div><div class="mc-bar"></div></div>
+      <div class="mc"><div class="mc-num">02</div><span class="mc-letter">BR</span><div class="mc-name">Brick</div><div class="mc-desc">Brick au poulet, pommes de terre, fromage fondant.</div><div class="mc-price">3,20€</div><div class="mc-bar"></div></div>
+      <div class="mc"><div class="mc-num">03</div><span class="mc-letter">DN</span><div class="mc-name">Donut's de Poulet</div><div class="mc-desc">Façon cordon bleu — poulet et fromage fondant.</div><div class="mc-price">3,20€</div><div class="mc-bar"></div></div>
+      <div class="mc"><div class="mc-num">04</div><span class="mc-letter">CU</span><div class="mc-name">Cuisse de Poulet</div><div class="mc-desc">Belle cuisse de poulet bien juteuse, bien assaisonnée.</div><div class="mc-price">4,50€</div><div class="mc-bar"></div></div>
+      <div class="mc"><div class="mc-num">05</div><span class="mc-letter">AI</span><div class="mc-name">3 Ailes de Poulet Grillé</div><div class="mc-desc">3 ailes grillées à la perfection.</div><div class="mc-price">4,50€</div><div class="mc-bar"></div></div>
+      <div class="mc"><div class="mc-num">06</div><span class="mc-letter">PI</span><div class="mc-name">3 Pilons de Poulet Grillé</div><div class="mc-desc">3 pilons rôtis, tendres et savoureux.</div><div class="mc-price">4,50€</div><div class="mc-bar"></div></div>
+      <div class="mc"><div class="mc-num">07</div><span class="mc-letter">BL</span><div class="mc-name">Blanc de Poulet</div><div class="mc-desc">Blanc de poulet mariné qui mijote dans sa délicieuse sauce aux olives.</div><div class="mc-price">5,50€</div><div class="mc-bar"></div></div>
+      <div class="mc"><div class="mc-num">08</div><span class="mc-letter">HD</span><div class="mc-name">Hot Dog</div><div class="mc-desc">Pain moelleux, saucisse de poulet savoureuse.</div><div class="mc-price">6,00€</div><div class="mc-bar"></div></div>
+      <div class="mc"><div class="mc-num">09</div><div class="mc-tag">N°2</div><span class="mc-letter">TX</span><div class="mc-name">Tenders x5</div><div class="mc-desc">5 tenders généreusement panés et frits.</div><div class="mc-price">7,00€</div><div class="mc-bar"></div></div>
+    </div>
+  </div>
+
+  <div class="cat-block">
+    <div class="cat-title">Les Poulets Entiers <span>2 ARTICLES</span></div>
+    <div class="menu-grid" style="grid-template-columns:1fr 1fr">
+      <div class="mc"><div class="mc-num">½</div><span class="mc-letter">½P</span><div class="mc-name">1/2 Poulet Grillé</div><div class="mc-desc">Demi-poulet juteux assaisonné de nos épices secrètes.</div><div class="mc-price">6,90€</div><div class="mc-bar"></div></div>
+      <div class="mc"><div class="mc-num">1×</div><span class="mc-letter">PG</span><div class="mc-name">Poulet Entier Grillé</div><div class="mc-desc">Poulet entier juteux assaisonné de nos épices secrètes.</div><div class="mc-price">12,90€</div><div class="mc-bar"></div></div>
+    </div>
+  </div>
+
+  <div class="cat-block">
+    <div class="cat-title">Les Accompagnements <span>5 ARTICLES</span></div>
+    <div class="menu-grid">
+      <div class="mc"><div class="mc-num">01</div><span class="mc-letter">PT</span><div class="mc-name">Pommes de Terre</div><div class="mc-desc">Barquette de pommes de terre sautées aux olives vertes et oignons.</div><div class="mc-price">6,00€</div><div class="mc-bar"></div></div>
+      <div class="mc"><div class="mc-num">02</div><div class="mc-tag">N°3</div><span class="mc-letter">RT</span><div class="mc-name">Riz Thaï Poulet</div><div class="mc-desc">Riz thaï parfumé accompagné d'émincé de poulet.</div><div class="mc-price">6,00€</div><div class="mc-bar"></div></div>
+      <div class="mc"><div class="mc-num">03</div><span class="mc-letter">PA</span><div class="mc-name">Pâtes au Poulet</div><div class="mc-desc">Sauce crémeuse, tendres morceaux de blanc de poulet.</div><div class="mc-price">6,00€</div><div class="mc-bar"></div></div>
+      <div class="mc"><div class="mc-num">04</div><span class="mc-letter">FM</span><div class="mc-name">Frites Maison</div><div class="mc-desc">Frites maison assaisonnées de nos épices, persil et paprika.</div><div class="mc-price">6,00€</div><div class="mc-bar"></div></div>
+      <div class="mc"><div class="mc-num">05</div><span class="mc-letter">BA</span><div class="mc-name">Banane Alloco</div><div class="mc-desc">Banane plantain frite, croustillante à l'extérieur et fondante à l'intérieur.</div><div class="mc-price">6,00€</div><div class="mc-bar"></div></div>
+    </div>
+  </div>
+
+  <div class="cat-block">
+    <div class="cat-title">Les Desserts <span>2 ARTICLES</span></div>
+    <div class="menu-grid" style="grid-template-columns:1fr 1fr">
+      <div class="mc"><div class="mc-num">01</div><span class="mc-letter">TI</span><div class="mc-name">Tiramisu</div><div class="mc-desc">Tiramisu crémeux au mascarpone. Plusieurs saveurs disponibles.</div><div class="mc-price">4,50€</div><div class="mc-bar"></div></div>
+      <div class="mc"><div class="mc-num">02</div><span class="mc-letter">TG</span><div class="mc-name">Tiramisu Géant</div><div class="mc-desc">Le grand format pour les grosses envies sucrées.</div><div class="mc-price">9,00€</div><div class="mc-bar"></div></div>
+    </div>
+  </div>
+
+  <div class="cat-block" style="margin-bottom:0">
+    <div class="cat-title">Les Boissons <span>1 ARTICLE</span></div>
+    <div class="menu-grid" style="grid-template-columns:1fr 1fr 1fr">
+      <div class="mc"><div class="mc-num">01</div><span class="mc-letter">BS</span><div class="mc-name">Bissap (Fait Maison)</div><div class="mc-desc">Délicieux jus de bissap fait maison. Fruité, floral et rafraîchissant.</div><div class="mc-price">2,90€</div><div class="mc-bar"></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="order-sec">
+  <div class="oi">
+    <div class="lbl" style="justify-content:center">Commande en ligne</div>
+    <h2>Livré chez toi<br><span class="o">en quelques clics</span></h2>
+    <p>Plus besoin de se déplacer. Commande sur Uber Eats — frais de livraison à 0,00 € et paiement par titre-restaurant accepté.</p>
+    <div class="ob">
+      <a href="https://www.ubereats.com/fr/store/chickn-korner-coulommiers/tTn6JCPpUXuDsAo6Bw1rew" target="_blank" class="b-fire-big">Commander sur Uber Eats →</a>
+      <a href="tel:0170350134" class="b-wire">01 70 35 01 34</a>
+    </div>
+  </div>
+</div>
+
+<section class="rev-sec fi" id="avis">
+  <div class="rev-head">
+    <div><div class="lbl">Ce qu'ils disent</div><h2>Avis <span class="o">clients</span></h2></div>
+    <div><div class="rev-big">4.6</div><div class="rev-sub">350+ AVIS UBER EATS</div><div class="rev-sub" style="margin-top:.1rem">4.7 · 175 AVIS GOOGLE</div></div>
+  </div>
+  <div class="rev-grid">
+    <div class="rc"><div class="rc-deco">01</div><div class="rc-stars">★★★★★</div><div class="rc-text">"Très bon, livraison rapide, livreuse très sympa, rien à dire c'est top."</div><div class="rc-author">Dorian E.</div><div class="rc-plat">Uber Eats · 24/09/25</div></div>
+    <div class="rc"><div class="rc-deco">02</div><div class="rc-stars">★★★★★</div><div class="rc-text">"Franchement très bonne qualité culinaire, très bon service et prix abordable. Je recommande les bananes avec sauce verte, cuisse ou pilon de poulet."</div><div class="rc-author">ez col</div><div class="rc-plat">Google · Janvier 2025</div></div>
+    <div class="rc"><div class="rc-deco">03</div><div class="rc-stars">★★★★★</div><div class="rc-text">"Super gentil."</div><div class="rc-author">Nawal K.</div><div class="rc-plat">Uber Eats · 24/02/25</div></div>
+  </div>
+</section>
+
+<div class="info-grid" id="contact">
+  <div class="ib"><div class="ib-wm">A</div><div class="ib-title">Adresse</div><div class="ib-text">22 Rue de la Pêcherie<br>77120 Coulommiers<br><br><a href="https://maps.google.com/?q=22+Rue+de+la+Pecherie+77120+Coulommiers" target="_blank">Voir sur Google Maps →</a></div></div>
+  <div class="ib"><div class="ib-wm">H</div><div class="ib-title">Horaires</div><div class="ib-text">Dim – Jeu : 11h00 – 23h00<br>Vendredi : 11h00 – 13h20 · 14h40 – 23h00<br>Samedi : 11h00 – 23h00<br><br><span class="open-pill"><span class="op-dot"></span>Ouvert jusqu'à 23h</span><br><br>Titre-restaurant accepté<br>Swile · Up · Pluxee · Bimpli</div></div>
+  <div class="ib"><div class="ib-wm">C</div><div class="ib-title">Commander</div><div class="ib-text"><a href="tel:0170350134">01 70 35 01 34</a><br><br>Livraison :<br><a href="https://www.ubereats.com/fr/store/chickn-korner-coulommiers/tTn6JCPpUXuDsAo6Bw1rew" target="_blank">Uber Eats →</a><br><br><a href="https://www.facebook.com/ChicknKorner" target="_blank">Facebook →</a></div></div>
+</div>
+
+<footer>
+  <div class="fl">Chick'n <em>Korner</em></div>
+  <div class="fc">© 2025 Chick'n Korner · Coulommiers · Halal · Tous droits réservés</div>
+  <div class="flinks"><a href="#menu">Menu</a><a href="#avis">Avis</a><a href="https://www.ubereats.com/fr/store/chickn-korner-coulommiers/tTn6JCPpUXuDsAo6Bw1rew" target="_blank">Uber Eats</a><a href="#contact">Contact</a></div>
+</footer>
+
+<script>
+const c=document.getElementById('c'),cr=document.getElementById('cr');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;c.style.left=mx+'px';c.style.top=my+'px'});
+(function loop(){rx+=(mx-rx)*0.13;ry+=(my-ry)*0.13;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(loop)})();
+document.querySelectorAll('a,button,.mc,.rc').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{c.style.width='20px';c.style.height='20px';c.style.borderRadius='3px'});
+  el.addEventListener('mouseleave',()=>{c.style.width='8px';c.style.height='8px';c.style.borderRadius='50%'});
+});
+const obs=new IntersectionObserver(es=>{es.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('v'),i*55)})},{threshold:0.06});
+document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
