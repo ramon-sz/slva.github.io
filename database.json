@@ -1,0 +1,137 @@
+{
+  "restaurant": {
+    "name": "Chick'n Korner",
+    "address": {
+      "street": "22 Rue de la Pêcherie",
+      "zip": "77120",
+      "city": "Coulommiers",
+      "mapsUrl": "https://maps.google.com/?q=22+Rue+de+la+Pecherie+77120+Coulommiers"
+    },
+    "phone": {
+      "value": "0170350134",
+      "display": "01 70 35 01 34"
+    },
+    "ubereats": "https://www.ubereats.com/fr/store/chickn-korner-coulommiers/tTn6JCPpUXuDsAo6Bw1rew",
+    "facebook": "https://www.facebook.com/ChicknKorner",
+    "ratings": {
+      "google": { "score": "4.7", "count": 175 },
+      "ubereats": { "score": "4.6", "count": "350+" }
+    },
+    "hours": [
+      "Dim – Jeu : 11h00 – 23h00",
+      "Vendredi : 11h00 – 13h20 · 14h40 – 23h00",
+      "Samedi : 11h00 – 23h00"
+    ],
+    "closingTime": "23h",
+    "payment": ["Swile", "Up", "Pluxee", "Bimpli"]
+  },
+  "menu": [
+    {
+      "id": "bon-plan",
+      "title": "Bon Plan",
+      "subtitle": "LE MUST",
+      "gridCols": "1fr",
+      "isLast": false,
+      "items": [
+        {
+          "featured": true,
+          "letter": "CK",
+          "name": "CK Bowl",
+          "desc": "Poulet ultra-croustillant, riz fondant, sauce secrète crémeuse, oignons frits. Le plat signature qui a tout pour plaire.",
+          "price": "11,50€",
+          "tag": "N°1 · Best-seller"
+        }
+      ]
+    },
+    {
+      "id": "plats-poulet",
+      "title": "Les Plats au Poulet",
+      "subtitle": "9 ARTICLES",
+      "gridCols": null,
+      "isLast": false,
+      "items": [
+        { "num": "01", "letter": "SB", "name": "Saucisse de Boeuf", "desc": "Saucisse de bœuf caramélisée, dorée et savoureuse.", "price": "2,50€" },
+        { "num": "02", "letter": "BR", "name": "Brick", "desc": "Brick au poulet, pommes de terre, fromage fondant.", "price": "3,20€" },
+        { "num": "03", "letter": "DN", "name": "Donut's de Poulet", "desc": "Façon cordon bleu — poulet et fromage fondant.", "price": "3,20€" },
+        { "num": "04", "letter": "CU", "name": "Cuisse de Poulet", "desc": "Belle cuisse de poulet bien juteuse, bien assaisonnée.", "price": "4,50€" },
+        { "num": "05", "letter": "AI", "name": "3 Ailes de Poulet Grillé", "desc": "3 ailes grillées à la perfection.", "price": "4,50€" },
+        { "num": "06", "letter": "PI", "name": "3 Pilons de Poulet Grillé", "desc": "3 pilons rôtis, tendres et savoureux.", "price": "4,50€" },
+        { "num": "07", "letter": "BL", "name": "Blanc de Poulet", "desc": "Blanc de poulet mariné qui mijote dans sa délicieuse sauce aux olives.", "price": "5,50€" },
+        { "num": "08", "letter": "HD", "name": "Hot Dog", "desc": "Pain moelleux, saucisse de poulet savoureuse.", "price": "6,00€" },
+        { "num": "09", "letter": "TX", "name": "Tenders x5", "desc": "5 tenders généreusement panés et frits.", "price": "7,00€", "tag": "N°2" }
+      ]
+    },
+    {
+      "id": "poulets-entiers",
+      "title": "Les Poulets Entiers",
+      "subtitle": "2 ARTICLES",
+      "gridCols": "1fr 1fr",
+      "isLast": false,
+      "items": [
+        { "num": "½", "letter": "½P", "name": "1/2 Poulet Grillé", "desc": "Demi-poulet juteux assaisonné de nos épices secrètes.", "price": "6,90€" },
+        { "num": "1×", "letter": "PG", "name": "Poulet Entier Grillé", "desc": "Poulet entier juteux assaisonné de nos épices secrètes.", "price": "12,90€" }
+      ]
+    },
+    {
+      "id": "accompagnements",
+      "title": "Les Accompagnements",
+      "subtitle": "5 ARTICLES",
+      "gridCols": null,
+      "isLast": false,
+      "items": [
+        { "num": "01", "letter": "PT", "name": "Pommes de Terre", "desc": "Barquette de pommes de terre sautées aux olives vertes et oignons.", "price": "6,00€" },
+        { "num": "02", "letter": "RT", "name": "Riz Thaï Poulet", "desc": "Riz thaï parfumé accompagné d'émincé de poulet.", "price": "6,00€", "tag": "N°3" },
+        { "num": "03", "letter": "PA", "name": "Pâtes au Poulet", "desc": "Sauce crémeuse, tendres morceaux de blanc de poulet.", "price": "6,00€" },
+        { "num": "04", "letter": "FM", "name": "Frites Maison", "desc": "Frites maison assaisonnées de nos épices, persil et paprika.", "price": "6,00€" },
+        { "num": "05", "letter": "BA", "name": "Banane Alloco", "desc": "Banane plantain frite, croustillante à l'extérieur et fondante à l'intérieur.", "price": "6,00€" }
+      ]
+    },
+    {
+      "id": "desserts",
+      "title": "Les Desserts",
+      "subtitle": "2 ARTICLES",
+      "gridCols": "1fr 1fr",
+      "isLast": false,
+      "items": [
+        { "num": "01", "letter": "TI", "name": "Tiramisu", "desc": "Tiramisu crémeux au mascarpone. Plusieurs saveurs disponibles.", "price": "4,50€" },
+        { "num": "02", "letter": "TG", "name": "Tiramisu Géant", "desc": "Le grand format pour les grosses envies sucrées.", "price": "9,00€" }
+      ]
+    },
+    {
+      "id": "boissons",
+      "title": "Les Boissons",
+      "subtitle": "1 ARTICLE",
+      "gridCols": "1fr 1fr 1fr",
+      "isLast": true,
+      "items": [
+        { "num": "01", "letter": "BS", "name": "Bissap (Fait Maison)", "desc": "Délicieux jus de bissap fait maison. Fruité, floral et rafraîchissant.", "price": "2,90€" }
+      ]
+    }
+  ],
+  "reviews": [
+    {
+      "num": "01",
+      "stars": 5,
+      "text": "Très bon, livraison rapide, livreuse très sympa, rien à dire c'est top.",
+      "author": "Dorian E.",
+      "platform": "Uber Eats",
+      "date": "24/09/25"
+    },
+    {
+      "num": "02",
+      "stars": 5,
+      "text": "Franchement très bonne qualité culinaire, très bon service et prix abordable. Je recommande les bananes avec sauce verte, cuisse ou pilon de poulet.",
+      "author": "ez col",
+      "platform": "Google",
+      "date": "Janvier 2025"
+    },
+    {
+      "num": "03",
+      "stars": 5,
+      "text": "Super gentil.",
+      "author": "Nawal K.",
+      "platform": "Uber Eats",
+      "date": "24/02/25"
+    }
+  ]
+}
